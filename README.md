@@ -192,3 +192,34 @@ erDiagram
 - 태그/회사명 동의어 처리도 확장 가능
 
 ---
+
+---
+
+## 7. Docker Compose로 실행하는 방법
+
+### 7.1. 사전 준비
+
+- Docker와 Docker Compose가 설치되어 있어야 합니다.
+- 프로젝트 루트에 `docker-compose.yaml` 파일과 `initdb/` 폴더(초기화 SQL 스크립트 포함)가 있어야 합니다.
+
+### 7.2. 실행 방법
+
+1. 터미널에서 프로젝트 루트 디렉토리로 이동합니다.
+
+2. 아래 명령어로 컨테이너를 빌드 및 실행합니다.
+
+3. ```docker-compose up --build```
+
+4. 최초 실행 시, Postgres 컨테이너가 생성되면서
+initdb/ 폴더 내의 SQL 스크립트가 자동으로 실행됩니다.
+(예: pg_trgm 확장 설치 및 인덱스 생성 등)
+
+5. FastAPI 서버는 기본적으로 http://localhost:8080 에서 접근할 수 있습니다.
+
+### 7.3. 주요 참고사항
+- DB가 이미 생성된 상태라면, initdb/의 SQL 스크립트는 재실행되지 않습니다.
+- DB를 완전히 새로 초기화하려면, 기존 볼륨을 삭제 후 다시 실행해야 합니다.
+```
+docker-compose down -v
+docker-compose up --build
+```
