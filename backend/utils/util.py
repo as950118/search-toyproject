@@ -10,11 +10,6 @@ def get_language(x_wanted_language: Optional[str] = Header(None)):
 
 
 def get_localized_name(name_objs, lang: str):
-    """
-    name_objs: List of objects with .language_code and .name attributes
-    lang: preferred language code
-    Returns: name string in preferred language, or fallback to any available
-    """
     if not name_objs:
         return None
     name_obj = next((n for n in name_objs if n.language_code == lang), None)
