@@ -17,32 +17,17 @@ services:
       timeout: 5s
       retries: 5
 
-  migration:
-    build: .
-    command: ["alembic", "upgrade", "head"]
-    environment:
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_NAME=company_db
-    depends_on:
-      db:
-        condition: service_healthy
 
   app:
     build: .
     ports:
-      - "8000:8000"
-    depends_on:
-      migration:
-        condition: service_completed_successfully
+      - "8080:8080"
     environment:
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_NAME=company_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=company_db
 
 volumes:
   postgres_data:
