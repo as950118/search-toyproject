@@ -1,10 +1,7 @@
 import pytest
 import json
-from flask import Flask
 from backend.main import app
 from fastapi.testclient import TestClient
-# from app import app
-# app = Flask(__name__)
 
 @pytest.fixture
 def api():
