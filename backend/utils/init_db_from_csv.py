@@ -1,8 +1,8 @@
 import csv
 import os
 from sqlalchemy.orm import Session
-from database import SessionLocal
-from models import Company, CompanyName, Tag, TagName, CompanyTag
+from backend.database import SessionLocal
+from backend.models import Company, CompanyName, Tag, TagName, CompanyTag
 
 CSV_FILE_PATH = os.environ.get("INIT_CSV_PATH", "company_tag_sample.csv")
 
